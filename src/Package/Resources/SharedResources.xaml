@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Bitmaps, also should probably put in it's own dictionry. -->
+
+
+    <BitmapImage UriSource="/Resources/folder_open.png" x:Key="ImgFolderOpen"></BitmapImage>
+    <BitmapImage UriSource="/Resources/query.png" x:Key="ImgQuery"></BitmapImage>
+    <BitmapImage UriSource="/Resources/workitem.png" x:Key="ImgWorkItem"></BitmapImage>
+    <BitmapImage UriSource="/Resources/folder_close.png" x:Key="ImgQueryFolderClosed"></BitmapImage>
+    <BitmapImage UriSource="/Resources/folder_open.png" x:Key="ImgQueryFolderOpen"></BitmapImage>
+    <BitmapImage UriSource="/Resources/folder_close_disabled.png" x:Key="ImgQueryFolderClosedDisabled"></BitmapImage>
+    <BitmapImage UriSource="/Resources/folder_open_disabled.png" x:Key="ImgQueryFolderOpenDisabled"></BitmapImage>
+
+    <!-- Region Default Styles, should probably break this out into it's own dictionariy and then merge the two.  -->
+
+
+    <Style TargetType="{x:Type UserControl}">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="3,1,0,1"></Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="3,4,3,4" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="MinWidth" Value="60" />
+    </Style>
+
+    <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="Margin" Value="3,4,3,4" />
+        <Setter Property="BorderBrush" Value="Black" />
+    </Style>
+</ResourceDictionary>

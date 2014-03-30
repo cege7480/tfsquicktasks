@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="ChrisTaylor.TfsQuickTasks.ToolWindows.QuickTaskExplorerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:wpf="clr-namespace:ChrisTaylor.TfsQuickTasks.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/SharedResources.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.Resources>
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <DataTemplate x:Key="WorkItemTemplate">
+                <StackPanel Orientation="Horizontal"  Margin="0,2,2,0" >
+                    <Image Source="{StaticResource ImgWorkItem}" Margin="3,1,3,1"></Image>
+                    <TextBlock Text="{Binding Title}"></TextBlock>
+                </StackPanel>
+            </DataTemplate>
+            <HierarchicalDataTemplate x:Key="WorkItemQueryTemplate" 
+                                      ItemsSource="{Binding Path=AllFoldersAndQueries}">
+                <StackPanel Orientation="Horizontal"  Margin="0,2,2,0" >
+                    <Image Source="{StaticResource ImgQuery}" Margin="3,1,3,1"></Image>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="WorkItemQueryFolderHierarchyTemplate" 
+                        				ItemsSource="{Binding Path=AllFoldersAndQueries}">
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,2,2,0">
+                    <Image x:Name="imgQueryFolder" Source="{StaticResource ImgQueryFolderClosed}" Margin="3,1,3,1"></Image>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </StackPanel>
+                <HierarchicalDataTemplate.Triggers>
+
+                    <DataTrigger Binding="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                        <Setter TargetName="imgQueryFolder" Property="Source" Value="{StaticResource ImgQueryFolderOpen}"></Setter>
+
+                    </DataTrigger>
+                </HierarchicalDataTemplate.Triggers>
+            </HierarchicalDataTemplate>
+            <wpf:WorkItemQueryTemplateSelector x:Key="WorkItemQueryTemplateSelector" 
+                                               WorkItemQueryFolderTemplate="{StaticResource WorkItemQueryFolderHierarchyTemplate}" 
+                                               WorkItemQueryTemplate="{StaticResource WorkItemQueryTemplate}" WorkItemTemplate="{StaticResource WorkItemTemplate}">
+
+            </wpf:WorkItemQueryTemplateSelector>
+
+
+
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+
+            <RowDefinition MaxHeight="27" />
+            <RowDefinition  />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+
+
+        <!--<TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="2,1,2,1"  HorizontalAlignment="Left" Visibility="{Binding ElementName=functionPointSelectorToolboxControl, Path=AllowFilter, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}">Filter:</TextBlock>-->
+        <!--<TextBox Grid.Row="0" Grid.Column="1" MaxHeight="22" Margin="2,1,2,1" Visibility="{Binding ElementName=functionPointSelectorToolboxControl, Path=AllowFilter, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}"></TextBox>-->
+
+
+
+        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" >
+
+            <!--<TreeView ItemsSource="{Binding}"  AllowDrop="True"  
+                  ItemTemplateSelector="{StaticResource WorkItemQueryTemplateSelector}" Name="tvAllItems" >
+
+            </TreeView>-->
+
+            <!--<TreeView ItemsSource="{Binding}"  AllowDrop="True"  
+                  ItemTemplateSelector="{StaticResource workItemQueryTemplateSelector}" Name="tvAllItems" 
+                   MouseMove="TreeView_MouseMove" >
+
+            </TreeView>-->
+            <!--<telerik:RadTreeView Name="tvWorkItemQuery"  Margin="0" 
+                                             ItemsSource="{Binding}" ItemTemplateSelector="{StaticResource workItemQueryTemplateSelector}" ItemPrepared="tvWorkItemQuery_ItemPrepared" LoadOnDemand="tvWorkItemQuery_LoadOnDemand" IsDragDropEnabled="True" IsLoadOnDemandEnabled="True" ItemDoubleClick="tvWorkItemQuery_ItemDoubleClick">
+            </telerik:RadTreeView>-->
+        </ScrollViewer>
+    </Grid>
+</UserControl>
